@@ -1,9 +1,5 @@
 #calculatorBody {
   margin: 200px auto;
-/*
-  max-width: 500px;
-  max-height: 800px;
-*/
 }
 
 .calculatorButtons table {
@@ -12,18 +8,20 @@
 
 .calculatorButtons table td {
   margin: auto;
-  padding: inherit;
+  padding: 0px;
   width: 75px;
   height: 75px;
-/*  text-align: center;*/
 }
 
 .calculatorButtons table td .btn {
-  margin: auto;
-  padding: inherit;
+  display: table;
+  width: 100%;
+  height: 100%;
+}
+
+.calculatorButtons table td .btn div {
   display: table-cell;
-  align-items: center;
-/*  text-align: center;*/
-  width: 75px;
-  height: 75px;
+  vertical-align: middle;
+  height: 100%;
+  width: 100%;
 }
