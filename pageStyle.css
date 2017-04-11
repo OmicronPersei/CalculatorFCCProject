@@ -1,0 +1,29 @@
+#calculatorBody {
+  margin: 200px auto;
+/*
+  max-width: 500px;
+  max-height: 800px;
+*/
+}
+
+.calculatorButtons table {
+  margin: auto;
+}
+
+.calculatorButtons table td {
+  margin: auto;
+  padding: inherit;
+  width: 75px;
+  height: 75px;
+/*  text-align: center;*/
+}
+
+.calculatorButtons table td .btn {
+  margin: auto;
+  padding: inherit;
+  display: table-cell;
+  align-items: center;
+/*  text-align: center;*/
+  width: 75px;
+  height: 75px;
+}
