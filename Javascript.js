@@ -6,15 +6,15 @@ function Calculator(DOMID) {
   
   this.DOMID = DOMID;
   
-  var userInputString = "";
+  this.userInputString = "";
   var oThis = this;
   
   var evaluateExpression = function(expression) {
-    var numberTokens = expression.split(/\d+/g);
-    var nonNumberTokens = expression.split(/\D/g);
+    var numberTokens = expression.match(/\d+/g);
+    var nonNumberTokens = expression.match(/\D/g);
     
     //Check that there are no more than one single operator in between numbers.
-    var errenousOperatorTokens = expression.split(/\D{2,}/g);
+    var errenousOperatorTokens = expression.match(/\D{2,}/g);
     
     if (errenousOperatorTokens !== null) {
       var errenousOperatorTokensStr = errenousOperatorTokens.join(",");
@@ -22,24 +22,56 @@ function Calculator(DOMID) {
       return "The following inputs are invalid: " + errenousOperatorTokensStr;
     }
     
-    var leftToken = undefined;
-    
-    
+    if (numberTokens !== null) {
+      var acc = parseInt(numberTokens[0], 10);
+      var i;
+      
+      if (nonNumberTokens !== null) {
+        for (i = 1; i < numberTokens.length; ++i) {
+          switch (nonNumberTokens[i-1]) {
+            case "+":
+              acc += parseInt(numberTokens[i], 10);
+              break;
+              
+            case "-":
+              acc -= parseInt(numberTokens[i], 10);
+              break;
+              
+            case "*":
+              acc *= parseInt(numberTokens[i], 10);
+              break;
+              
+            case "\/":
+              acc /= parseInt(numberTokens[i], 10);
+              break;
+              
+            default:
+              return "Invalid operation: " + nonNumberTokens[i-1];
+          }
+        }
+        return acc;
+      } else {
+        return numberTokens[0];
+      }
+    }
   };
   
   this.buttonPress = function(buttonString) {
     switch (buttonString) {
       case "=":
-        //blah
-        break;
+        var result = evaluateExpression(oThis.userInputString);
+        //Set the user input string to the result, as if the user wants to work with
+        //the currently displayed result.
+        oThis.userInputString = result;
+        return result;
         
       case "CLR":
-        //blah
-        break;
+        oThis.userInputString = "";
+        return "";
         
       default:
         oThis.userInputString += buttonString;
-        break;
+        return oThis.userInputString;
     }
   };
 }
