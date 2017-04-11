@@ -1,32 +1,45 @@
+body {
+  background-color: grey;
+}
+
 .calculatorInputText,.calculatorButtons .btn{
   font-family: Segoe UI,sans-serif;
-  font-size: 35px;
-  font-weight: 400;
+  font-size: 25px;
+  font-weight: 700;
+}
+
+.panel {
+  margin-bottom: 0px;
 }
 
 #calculatorBody {
   margin: 200px auto;
   width: 300px;
-  height: 450px;
+  height: 425px;
 }
 
 .calculatorButtons table {
-  margin: auto;
+  margin: 0px;
 }
 
 .calculatorButtons table td {
   margin: auto;
-  padding: 0px;
+  padding: 5px;
   width: 75px;
   height: 75px;
 }
 
 .calculatorButtons table td .btn {
   display: table;
+/*
+  min-width: 65px;
+  min-height: 65px;
+*/
   width: 100%;
   height: 100%;
-  margin: 0px;
+  margin: auto;
   padding: 0px;
+  border-radius: 3px;
 }
 
 .calculatorButtons table td .btn div {
@@ -34,4 +47,21 @@
   vertical-align: middle;
   height: 100%;
   width: 100%;
+}
+
+.btn.specialFunctionButton {
+  background-color: #abc497;
+  color: white;
+  font-weight: 100;
+}
+
+.btn.operatorButton {
+  background-color: #7791c0;
+  color: white;
+  font-weight: 900;
+}
+
+.numberButton {
+  background-color: lightgrey;
+  color: black;
 }
