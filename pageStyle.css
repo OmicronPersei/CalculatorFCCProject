@@ -1,5 +1,13 @@
+.calculatorInputText,.calculatorButtons .btn{
+  font-family: Segoe UI,sans-serif;
+  font-size: 35px;
+  font-weight: 400;
+}
+
 #calculatorBody {
   margin: 200px auto;
+  width: 300px;
+  height: 450px;
 }
 
 .calculatorButtons table {
@@ -17,6 +25,8 @@
   display: table;
   width: 100%;
   height: 100%;
+  margin: 0px;
+  padding: 0px;
 }
 
 .calculatorButtons table td .btn div {
