@@ -27,7 +27,7 @@ function Calculator() {
     }
     
     if (numberTokens !== null) {
-      var acc = parseInt(numberTokens[0], 10);
+      var acc = parseFloat(numberTokens[0], 10);
       var i;
       
       if (nonNumberTokens !== null) {
@@ -35,19 +35,19 @@ function Calculator() {
           for (i = 1; i < numberTokens.length; ++i) {
             switch (nonNumberTokens[i-1]) {
               case "+":
-                acc += parseInt(numberTokens[i], 10);
+                acc += parseFloat(numberTokens[i], 10);
                 break;
 
               case "-":
-                acc -= parseInt(numberTokens[i], 10);
+                acc -= parseFloat(numberTokens[i], 10);
                 break;
 
               case "*":
-                acc *= parseInt(numberTokens[i], 10);
+                acc *= parseFloat(numberTokens[i], 10);
                 break;
 
               case "\/":
-                acc /= parseInt(numberTokens[i], 10);
+                acc /= parseFloat(numberTokens[i], 10);
                 break;
 
               default:
@@ -79,7 +79,7 @@ function Calculator() {
         
       case "(del)":
         if (oThis.userInputString) {
-          oThis.userInputString = oThis.userInputString.substr(0, oThis.userInputString.length - 2);
+          oThis.userInputString = oThis.userInputString.substr(0, oThis.userInputString.length - 1);
         }
         return oThis.userInputString;
         
