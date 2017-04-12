@@ -8,6 +8,10 @@ body {
   font-weight: 700;
 }
 
+.calculatorInputText {
+  min-height: 50px;
+}
+
 .panel {
   margin-bottom: 0px;
 }

@@ -1,25 +1,29 @@
 /*global $, jQuery, navigator*/
 /*jslint vars: true, plusplus: true, devel: true, nomen: true, indent: 2, maxerr: 50, white: true  */
 
-function Calculator(DOMID) {
+function Calculator() {
   "use strict";
-  
-  this.DOMID = DOMID;
   
   this.userInputString = "";
   var oThis = this;
   
   var evaluateExpression = function(expression) {
-    var numberTokens = expression.match(/\d+/g);
-    var nonNumberTokens = expression.match(/\D/g);
+    
+    if (String(expression).match(/^-\d+/)) {
+      expression = String(expression).replace(/^-/, "0-");
+    }
+    var numberTokens = String(expression).match(/\d+\.\d+|\d+/g);
+    var nonNumberTokens = String(expression).match(/[^\d\.]/g);
+    
+    var invalidInputStr = "Invalid input.";
     
     //Check that there are no more than one single operator in between numbers.
-    var errenousOperatorTokens = expression.match(/\D{2,}/g);
+    var errenousOperatorTokens = String(expression).match(/\D{2,}/g);
     
     if (errenousOperatorTokens !== null) {
       var errenousOperatorTokensStr = errenousOperatorTokens.join(",");
       
-      return "The following inputs are invalid: " + errenousOperatorTokensStr;
+      return invalidInputStr;
     }
     
     if (numberTokens !== null) {
@@ -27,27 +31,31 @@ function Calculator(DOMID) {
       var i;
       
       if (nonNumberTokens !== null) {
-        for (i = 1; i < numberTokens.length; ++i) {
-          switch (nonNumberTokens[i-1]) {
-            case "+":
-              acc += parseInt(numberTokens[i], 10);
-              break;
-              
-            case "-":
-              acc -= parseInt(numberTokens[i], 10);
-              break;
-              
-            case "*":
-              acc *= parseInt(numberTokens[i], 10);
-              break;
-              
-            case "\/":
-              acc /= parseInt(numberTokens[i], 10);
-              break;
-              
-            default:
-              return "Invalid operation: " + nonNumberTokens[i-1];
+        if ((numberTokens.length - 1) === nonNumberTokens.length) {
+          for (i = 1; i < numberTokens.length; ++i) {
+            switch (nonNumberTokens[i-1]) {
+              case "+":
+                acc += parseInt(numberTokens[i], 10);
+                break;
+
+              case "-":
+                acc -= parseInt(numberTokens[i], 10);
+                break;
+
+              case "*":
+                acc *= parseInt(numberTokens[i], 10);
+                break;
+
+              case "\/":
+                acc /= parseInt(numberTokens[i], 10);
+                break;
+
+              default:
+                return "Invalid operation: " + nonNumberTokens[i-1];
+            }
           }
+        } else {
+          return invalidInputStr;
         }
         return acc;
       } else {
@@ -65,27 +73,42 @@ function Calculator(DOMID) {
         oThis.userInputString = result;
         return result;
         
-      case "CLR":
+      case "(clr)":
         oThis.userInputString = "";
         return "";
         
+      case "(del)":
+        if (oThis.userInputString) {
+          oThis.userInputString = oThis.userInputString.substr(0, oThis.userInputString.length - 2);
+        }
+        return oThis.userInputString;
+        
       default:
-        oThis.userInputString += buttonString;
+        if (oThis.userInputString) {
+          oThis.userInputString += buttonString;
+        } else {
+          oThis.userInputString = buttonString;
+        }
+        
         return oThis.userInputString;
     }
   };
 }
 
-function calculatorOnClicked(e) {
-  "use strict";
-  
-  console.log(e.target.parentElement.getAttribute("calcButtonValue"));
-}
-
 function setupCalculator() {
   "use strict";
   
-  $("#calculatorBody").on("click", ".calcButton", calculatorOnClicked);
+  var calc = new Calculator();
+  
+  $("#calculatorBody").on("click", ".calcButton", function(e) {
+    var calcButtonValue = e.target.parentElement.getAttribute("calcButtonValue");
+    
+    if (calcButtonValue) {
+      var userDisplay = calc.buttonPress(calcButtonValue);
+      
+      $("#calculatorBody .calculatorInputText").html(userDisplay);
+    }
+  });
 }
 
 $(document).ready(function() {
