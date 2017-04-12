@@ -75,3 +75,19 @@ function Calculator(DOMID) {
     }
   };
 }
+
+function calculatorOnClicked(e) {
+  "use strict";
+  
+  console.log(e.target.parentElement.getAttribute("calcButtonValue"));
+}
+
+function setupCalculator() {
+  "use strict";
+  
+  $("#calculatorBody").on("click", ".calcButton", calculatorOnClicked);
+}
+
+$(document).ready(function() {
+  setupCalculator();
+});
