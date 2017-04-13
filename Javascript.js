@@ -106,7 +106,10 @@ function setupCalculator() {
     if (calcButtonValue) {
       var userDisplay = calc.buttonPress(calcButtonValue);
       
-      $("#calculatorBody .calculatorInputText").html(userDisplay);
+      var calcInputText = $("#calculatorBody .calculatorInputText");
+      
+      calcInputText.html("<span>" + userDisplay + "</span>");
+      calcInputText.textfill(40);
     }
   });
 }
