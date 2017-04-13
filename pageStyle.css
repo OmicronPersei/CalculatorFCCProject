@@ -2,29 +2,39 @@ body {
   background-color: grey;
 }
 
-.calculatorInputText,.calculatorButtons .btn{
-  font-family: Segoe UI,sans-serif;
-  font-size: 25px;
-  font-weight: 700;
-}
-
-.calculatorInputText {
-  min-height: 50px;
-  text-align: right;
-}
-
 .panel {
   margin-bottom: 0px;
+  border-style: none;
 }
 
 #calculatorBody {
   margin: 200px auto;
-  width: 300px;
-  height: 425px;
+  width: 340px;
+  padding: 20px;
+  border-radius: 0px;
+}
+
+.calculatorInputText {
+  min-height: 75px;
+  text-align: right;
+  background-color: lightgray;
+  margin: 5px 5px 15px 5px;
+  padding: 5px;
+  width: 290px;
+  font-family: Segoe UI,sans-serif;
+  font-size: 40px;
+  font-weight: 200;
+  border-radius: 0px;
+}
+
+.calculatorButtons .btn { 
+  font-family: Segoe UI,sans-serif;
+  font-size: 35px;
+  font-weight: 100;
 }
 
 .calculatorButtons table {
-  margin: 0px;
+  margin: 10px 0px 0px 0px;
 }
 
 .calculatorButtons table td {
@@ -36,15 +46,12 @@ body {
 
 .calculatorButtons table td .btn {
   display: table;
-/*
-  min-width: 65px;
-  min-height: 65px;
-*/
   width: 100%;
   height: 100%;
   margin: auto;
   padding: 0px;
-  border-radius: 3px;
+  border-radius: 0px;
+  border-style: none;
 }
 
 .calculatorButtons table td .btn div {
@@ -52,18 +59,21 @@ body {
   vertical-align: middle;
   height: 100%;
   width: 100%;
+  margin: 0px;
+  padding: 0px;
 }
 
 .btn.specialFunctionButton {
   background-color: #abc497;
   color: white;
   font-weight: 100;
+  font-size: 25px;
 }
 
 .btn.operatorButton {
   background-color: #7791c0;
   color: white;
-  font-weight: 900;
+  font-weight: 200;
 }
 
 .numberButton {
