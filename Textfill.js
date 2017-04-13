@@ -1,7 +1,7 @@
 //Obtained from: https://gist.github.com/mekwall/1263939
 
-(function(library) {
-    library.fn.textfill = function(maxFontSize) {
+(function($) {
+    $.fn.textfill = function(maxFontSize) {
         maxFontSize = parseInt(maxFontSize, 10);
         return this.each(function(){
             var ourText = $("span", this),
