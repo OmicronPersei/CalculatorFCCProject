@@ -44,6 +44,14 @@ body {
   height: 75px;
 }
 
+.calculatorButtons table td[rowspan="2"] {
+  height: 150px;
+}
+
+.calculatorButtons table td[colspan="2"] {
+  width: 150px;
+}
+
 .calculatorButtons table td .btn {
   display: table;
   width: 100%;
