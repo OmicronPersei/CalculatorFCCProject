@@ -8,60 +8,62 @@ function Calculator() {
   var oThis = this;
   
   var evaluateExpression = function(expression) {
-    
-    if (String(expression).match(/^-\d+/)) {
-      expression = String(expression).replace(/^-/, "0-");
-    }
-    var numberTokens = String(expression).match(/\d+\.\d+|\d+/g);
-    var nonNumberTokens = String(expression).match(/[^\d\.]/g);
-    
-    var invalidInputStr = "Invalid input.";
-    
-    //Check that there are no more than one single operator in between numbers.
-    var errenousOperatorTokens = String(expression).match(/\D{2,}/g);
-    
-    if (errenousOperatorTokens !== null) {
-      var errenousOperatorTokensStr = errenousOperatorTokens.join(",");
-      
-      return invalidInputStr;
-    }
-    
-    if (numberTokens !== null) {
-      var acc = parseFloat(numberTokens[0], 10);
-      var i;
-      
-      if (nonNumberTokens !== null) {
-        if ((numberTokens.length - 1) === nonNumberTokens.length) {
-          for (i = 1; i < numberTokens.length; ++i) {
-            switch (nonNumberTokens[i-1]) {
-              case "+":
-                acc += parseFloat(numberTokens[i], 10);
-                break;
+    if ((expression !== undefined) && (expression !== "")) {
+      if (String(expression).match(/^-\d+/)) {
+        expression = String(expression).replace(/^-/, "0-");
+      }
+      var numberTokens = String(expression).match(/\d+\.\d+|\d+/g);
+      var nonNumberTokens = String(expression).match(/[^\d\.]/g);
 
-              case "-":
-                acc -= parseFloat(numberTokens[i], 10);
-                break;
+      var invalidInputStr = "Invalid input.";
 
-              case "*":
-                acc *= parseFloat(numberTokens[i], 10);
-                break;
+      //Check that there are no more than one single operator in between numbers.
+      var errenousOperatorTokens = String(expression).match(/\D{2,}/g);
 
-              case "\/":
-                acc /= parseFloat(numberTokens[i], 10);
-                break;
+      if (errenousOperatorTokens !== null) {
+        var errenousOperatorTokensStr = errenousOperatorTokens.join(",");
 
-              default:
-                return "Invalid operation: " + nonNumberTokens[i-1];
+        return invalidInputStr;
+      }
+
+      if (numberTokens !== null) {
+        var acc = parseFloat(numberTokens[0], 10);
+        var i;
+
+        if (nonNumberTokens !== null) {
+          if ((numberTokens.length - 1) === nonNumberTokens.length) {
+            for (i = 1; i < numberTokens.length; ++i) {
+              switch (nonNumberTokens[i-1]) {
+                case "+":
+                  acc += parseFloat(numberTokens[i], 10);
+                  break;
+
+                case "-":
+                  acc -= parseFloat(numberTokens[i], 10);
+                  break;
+
+                case "*":
+                  acc *= parseFloat(numberTokens[i], 10);
+                  break;
+
+                case "\/":
+                  acc /= parseFloat(numberTokens[i], 10);
+                  break;
+
+                default:
+                  return "Invalid operation: " + nonNumberTokens[i-1];
+              }
             }
+          } else {
+            return invalidInputStr;
           }
+          return acc;
         } else {
-          return invalidInputStr;
+          return numberTokens[0];
         }
-        return acc;
-      } else {
-        return numberTokens[0];
       }
     }
+    
   };
   
   this.buttonPress = function(buttonString) {
@@ -107,6 +109,10 @@ function setupCalculator() {
       var userDisplay = calc.buttonPress(calcButtonValue);
       
       var calcInputText = $("#calculatorBody .calculatorInputText");
+      
+      if (userDisplay === undefined) {
+        userDisplay = "";
+      }
       
       calcInputText.html("<span>" + userDisplay + "</span>");
       calcInputText.textfill(40);
